@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>API Versioning Documentation</title>
+</head>
+
+<body>
+    <h1>API Versioning Documentation</h1>
+    <p>For the Swagger Documentation of supported requests and responses, please visit one of the following pages:
+        <ul>
+            <li><a href="/v1/api-docs">/v1/api-docs</a></li>
+            <!-- <li><a href="/v2/api-docs">/v2/api-docs</a></li> -->
+        </ul>
+    </p>
+    <p>There are 2 supported ways to specify and lock the preferred version. All of them are optional, and omitting all will default to Version 1.</p>
+    <p>This approach of versioning was inspired by <a href="https://www.troyhunt.com/your-api-versioning-is-wrong-which-is/">Troy Hunt's relevant article</a>.</p>
+
+    <h3>1. Custom request header</h3>
+    <pre>curl --request GET 'https://&lt;domain&gt;/&lt;path&gt;' --header 'api-version: 1'</pre>
+    <p>It is not required and version 1 is presumed by default.</p>
+    <p>This approach allowes the API URL to represent the resource. The <a href="https://opensource.zalando.com/restful-api-guidelines/#115">Zalando API Guidelines</a>, that are based on the OpenAPI Specification, strongly discourage URL versiong. To keep in accordance with that, we facilitate versioning via Content Headers.</p>
+    <p>The downside is the complexity of making an api call. It is not possible to access versions simply from the browser.</p>
+
+    <h3>2. URL path</h3>
+    <pre>curl --request GET 'https://&lt;domain&gt;/v1/&lt;path&gt;'</pre>
+    <p>Version parameters in the path are not required and can be omitted. Version 1 is presumed by default.</p>
+    <p>This approach is more convenient, because by specifying the version parameter, GET requests can be simply inspected in the browser. Mapping URLs to specific versions also makes it easy to share a link in a discussion or documentation.</p>
+    <p><b>If the URL path contains version information, it is going to take precedent over the request header information.</b></p>
+</body>
+
+</html>

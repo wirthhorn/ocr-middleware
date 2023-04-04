@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Example OCR API",
+    "description": "This API serves as a middleware between the OCR engine and the client. It allows to submit images for OCR and to retrieve the OCR results.",
+    "version": "2.0.0",
+    "contact": {
+      "name": "Armin Emmert",
+      "email": "emmert@wirth-horn.de",
+      "url": "https://www.wirth-horn.de/"
+    }
+  },
+  "paths": {
+    "/ocr": {
+      "get": {
+        "summary": "Get OCR data",
+        "description": "Retrieve OCR data from a JSON file",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fullText": {
+                      "type": "string"
+                    },
+                    "isbnList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "isbn": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "isbn"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "fullText",
+                    "isbnList"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Perform OCR on an image",
+        "description": "Submits an image file for optical character recognition (OCR).",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "document",
+            "in": "formData",
+            "description": "The image file to be processed.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fullText": {
+                      "type": "string"
+                    },
+                    "isbnList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "isbn": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "isbn"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "fullText",
+                    "isbnList"
+                  ]
+                },
+                "examples": {
+                  "example-with-isbns": {
+                    "summary": "Example with 11 isbns found",
+                    "value": {
+                      "fullText": "●\nLiebe Eltern der zukünftigen 2. Klassen,\nim neuen Schuljahr benötigen Ihre Kinder folgende Arbeitshefte und Materialien:\nArbeitshefte Mathematik:\nFlex und Flo Paket 2 2014 (4 Themenhefte) (Diesterweg)\nFlex und Flo Diagnoseheft 2 2014 (Diesterweg)\nZahlenfuchs 2 (Jandorf Verlag)\nNase vorn Plus und minus bis 100 (Cornelsen)\nArbeitshefte Deutsch:\nFlex und Flora Paket 2 2013 (4 Themenhefte) (Diesterweg)\nFlex und Flora Diagnoseheft 2 2013 (Diesterweg)\nWörterbuch für die Grundschule (mit Englischteil) (Jandorf)\nWörterbuchübungshefte 1+2 (Jandorf Verlag)\nSchreiblehrgang SAS (Westermann Verlag)\nRechtschreiben mit Rico Schnabel 2\nrechtshändig\nlinkshändig\nnamion GRUNDSCHULE THIEDE\nMelsubon cewto\nISBN: 978-3-425-13520-5\nISBN: 978-3-425-13502-1\nISBN: 978-3-939965-34-3\nISBN:978-3-06-084117-2\n(Lies mal Heft: entsprechend das nächste Heft, welches Ihr Kind benötigt (Jandorf Verlag))\n7,25 €\nISBN: 978-3-425-14522-8 24,50 €\nISBN: 978-3-425-14521-1\nISBN 978-3-96081-080-3\nISBN 978-3-939965-27-5\nISBN 978-3-14-123352-0\nISBN 978-3-14-123356-8\nISBN 978-3-619-22040-3\n7,90 €\n5,00 €\n7,75 €\n7,75 €\n7,50 €\n24,50 €\n7,25 €\n3,90 €\n3,25 €\n38,90\nMaterialien\n(mit * markiert: können aus der 1. Klasse weiterbenutzt werden, sofern sie noch in Ordnung sind)\n1 Sammelmappe DIN A3*\n67,65\n59&",
+                      "isbnList": [
+                        {
+                          "isbn": "978-3-425-13520-5"
+                        },
+                        {
+                          "isbn": "978-3-425-13502-1"
+                        },
+                        {
+                          "isbn": "978-3-939965-34-3"
+                        },
+                        {
+                          "isbn": "978-3-06-084117-2"
+                        },
+                        {
+                          "isbn": "978-3-425-14522-8"
+                        },
+                        {
+                          "isbn": "978-3-425-14521-1"
+                        },
+                        {
+                          "isbn": "978-3-96081-080-3"
+                        },
+                        {
+                          "isbn": "978-3-939965-27-5"
+                        },
+                        {
+                          "isbn": "978-3-14-123352-0"
+                        },
+                        {
+                          "isbn": "978-3-14-123356-8"
+                        },
+                        {
+                          "isbn": "978-3-619-22040-3"
+                        }
+                      ]
+                    }
+                  },
+                  "example-without-isbns": {
+                    "summary": "Example with no isbns found",
+                    "value": {
+                      "fullText": "Vielen Dank für deine Bestellung!",
+                      "isbnList": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "A description of the error."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
