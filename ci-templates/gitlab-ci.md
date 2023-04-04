@@ -21,7 +21,7 @@ A DigitalOcean account with access to a container registry.
 ```yml
 # /.gitlab-ci.yml
 variables:
-  DOCKER_HOST: tcp://docker:2375 
+  DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
