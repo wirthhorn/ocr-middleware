@@ -56,6 +56,21 @@ Replace `<tag>` with a version number or a descriptive name for your image.
 
 Some CI/CD pipeline templates are provided in the `ci-template` folder. Use them as a starting point to set up your own pipeline for deploying the application. The examples include a way to build a docker image, and to push it into the Digital Ocean Container Registry.
 
+
+## Forking the project
+
+You might want to fork the project to your Github or your internal Gitlab in order to set up your custom CI/CD pipeline. Instructions are the same it both cases. Here is how you can do that:
+
+1. Create empty Gitlab repository and clone to your computer
+2. Add "upstream remote" to your gitlab repo with `git remote add upstream https://github.com/user/repo`
+3. Fetch and pull from the upstream to follow changes with `git pull upstream main`
+4. Push your changes to your own gitlab repository with `git push origin main`. Use `git push -u origin main` the first time to lock default remote location of `git push`.
+
+Verify your settings:
+
+- `git remote -v`: list the available remote locations for push and pull. Check if correct.
+- `git remote show origin`: shows the currently configured locations for `git push` and `git pull` if no remote is specified.
+
 ## Built with
 
 - [Express JS](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
