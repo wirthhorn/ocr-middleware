@@ -63,7 +63,7 @@ You might want to fork the project to your Github or your internal Gitlab in ord
 
 1. Create empty Gitlab repository and clone to your computer
 2. Add "upstream remote" to your gitlab repo with `git remote add upstream https://github.com/user/repo`
-3. Fetch and pull from the upstream to follow changes with `git pull upstream main`
+3. Fetch and pull from the upstream to follow changes with `git pull upstream main --rebase`
 4. Push your changes to your own gitlab repository with `git push origin main`. Use `git push -u origin main` the first time to lock default remote location of `git push`.
 
 Verify your settings:
